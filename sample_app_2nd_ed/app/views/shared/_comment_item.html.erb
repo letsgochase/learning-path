@@ -1,0 +1,11 @@
+<li id="<%= comment_item.id %>">
+    <span class="content"><%= comment_item.content %></span>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(comment_item.created_at) %> ago.
+    </span>
+    <% if current_user?(comment_item.micropost.user) %>
+      <%= link_to 'edit', [:edit, comment_item] %>
+      <%= link_to "delete", delete_comment_item_path(:id => comment_item, :micropost_id => comment_item.micropost_id), method: :delete, data: { confirm: "You sure?" },
+        title: comment_item.content %>
+    <% end %>
+</li>

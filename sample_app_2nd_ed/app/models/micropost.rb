@@ -1,6 +1,7 @@
 class Micropost < ActiveRecord::Base
   attr_accessible :content
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
@@ -12,5 +13,9 @@ class Micropost < ActiveRecord::Base
                          WHERE follower_id = :user_id"
     where("user_id IN (#{followed_user_ids}) OR user_id = :user_id",
           user_id: user.id)
+  end
+
+  def get_comments
+    Comment.get_comments_by_micropost(self)
   end
 end

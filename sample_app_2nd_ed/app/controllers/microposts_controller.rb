@@ -13,6 +13,13 @@ class MicropostsController < ApplicationController
     end
   end
 
+  def show
+    @micropost = Micropost.find(params[:id])
+    @comment  = @micropost.comments.build
+    @user = User.find(current_user.id)
+    @comments = @micropost.comments.paginate(page: params[:page])
+  end
+
   def destroy
     @micropost.destroy
     redirect_to root_url

@@ -5,10 +5,17 @@ SampleApp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:show, :create, :destroy]
+  resources :comments, only: [:create, :edit, :destroy]
   resources :relationships, only: [:create, :destroy]
       
   root to: 'static_pages#home'
+
+  match '/microposts/:id', to: 'microposts#show'
+  match '/comments/:id/edit', to: 'comments#edit'
+  delete 'delete_comment_item' => 'comments#destroy'
+  put 'comments/:id/', to: 'comments#update'
+
 
   match '/signup',  to: 'users#new'
   match '/signin',  to: 'sessions#new'
