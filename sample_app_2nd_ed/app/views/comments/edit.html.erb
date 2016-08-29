@@ -1,0 +1,14 @@
+<% provide(:title, "Edit comment") %>
+<h1>Update your comment</h1>
+
+<div class="row">
+  <aside class="span4 offset3 field">
+  <%= form_for(@comment) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :content %>
+      <%= f.text_area :content %>
+      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+    <% end %>
+  </aside>
+</div>

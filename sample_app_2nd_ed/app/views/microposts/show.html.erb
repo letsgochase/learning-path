@@ -1,0 +1,17 @@
+<% provide(:title, 'Microposts') %>
+<div class="row">
+	<aside class="span4">
+		<section>
+			<h1>
+				<%=@micropost.content%>
+			</h1>
+		</section>
+		<section>
+        	<%= render 'shared/comment_form' %>
+        </section>
+	</aside>
+	<aside class="span8">
+      <h3>Comments</h3>
+        <%= render 'shared/comment' %>
+    </aside>
+</div>
